@@ -1,6 +1,7 @@
 mod problems;
 
 use std::env;
+use std::process::Command;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -10,8 +11,24 @@ fn main() {
     }
 
     let problem_number = &args[1];
-    match problems::get_problem_function(problem_number) {
-        Some(solution) => solution(),
-        None => eprintln!("Problem {} not found!", problem_number),
-    }
+
+    // Run unit tests for the specific problem
+    let module_name = format!("problems::q{}", problem_number);
+
+    println!("Running tests for problem {}", problem_number);
+
+    let output = Command::new("cargo")
+        .arg("test")
+        .arg("--")
+        .arg(&module_name)
+        .arg("--color")
+        .arg("always") // Force color in output
+        .spawn()
+        .expect("Failed to execute cargo test")
+        .wait_with_output()
+        .expect("Failed to wait on cargo test");
+
+    // Print the test output with colors preserved
+    print!("{}", String::from_utf8_lossy(&output.stdout));
+    eprint!("{}", String::from_utf8_lossy(&output.stderr));
 }

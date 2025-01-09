@@ -34,6 +34,7 @@ fn main() {
     // Generate the `mod.rs` content
     let mod_content = format!(
         r#"
+#![allow(dead_code)]
 use std::collections::HashMap;
 
 pub type ProblemFn = fn();
