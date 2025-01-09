@@ -20,4 +20,20 @@ mod tests {
         let output = solution(input, target);
         assert_eq!(output, vec![0, 1]);
     }
+
+    #[test]
+    fn test_solution_case2() {
+        let input = vec![3, 2, 4];
+        let target = 6;
+        let output = solution(input, target);
+        assert_eq!(output, vec![1, 2]);
+    }
+
+    #[test]
+    fn test_solution_case3() {
+        let input = vec![3, 3];
+        let target = 6;
+        let output = solution(input, target);
+        assert_eq!(output, vec![0, 1]);
+    }
 }
