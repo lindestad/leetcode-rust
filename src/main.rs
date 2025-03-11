@@ -11,22 +11,38 @@ fn main() {
     }
 
     let problem_number = &args[1];
-
     // Run unit tests for the specific problem
     let module_name = format!("problems::q{}", problem_number);
 
     println!("Running tests for problem {}", problem_number);
 
-    let output = Command::new("cargo")
-        .arg("test")
-        .arg("--")
-        .arg(&module_name)
-        .arg("--color")
-        .arg("always") // Force color in output
-        .spawn()
-        .expect("Failed to execute cargo test")
-        .wait_with_output()
-        .expect("Failed to wait on cargo test");
+    #[allow(clippy::needless_late_init)]
+    let output;
+
+    if args.len() > 2 && &args[2] == "--nocapture" {
+        output = Command::new("cargo")
+            .arg("test")
+            .arg("--")
+            .arg(&module_name)
+            .arg("--color")
+            .arg("always") // Force color in output
+            .arg("--nocapture")
+            .spawn()
+            .expect("Failed to execute cargo test")
+            .wait_with_output()
+            .expect("Failed to wait on cargo test");
+    } else {
+        output = Command::new("cargo")
+            .arg("test")
+            .arg("--")
+            .arg(&module_name)
+            .arg("--color")
+            .arg("always") // Force color in output
+            .spawn()
+            .expect("Failed to execute cargo test")
+            .wait_with_output()
+            .expect("Failed to wait on cargo test");
+    }
 
     // Print the test output with colors preserved
     print!("{}", String::from_utf8_lossy(&output.stdout));
