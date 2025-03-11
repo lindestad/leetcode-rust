@@ -1,3 +1,5 @@
+pub struct Solution;
+
 struct ZipMixedLength<A, B> {
     iter1: A,
     iter2: B,
@@ -28,23 +30,24 @@ where
 }
 
 // 1768. Merge Strings Alternately
-pub fn merge_alternately(word1: String, word2: String) -> String {
-    let mut result = String::new();
+impl Solution {
+    pub fn merge_alternately(word1: String, word2: String) -> String {
+        let mut result = String::new();
 
-    let iter1 = word1.chars();
-    let iter2 = word2.chars();
+        let iter1 = word1.chars();
+        let iter2 = word2.chars();
 
-    for (a, b) in ZipMixedLength::new(iter1, iter2) {
-        if a != '\0' {
-            result.push(a);
+        for (a, b) in ZipMixedLength::new(iter1, iter2) {
+            if a != '\0' {
+                result.push(a);
+            }
+            if b != '\0' {
+                result.push(b);
+            }
         }
-        if b != '\0' {
-            result.push(b);
-        }
+        result
     }
-    result
 }
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -53,7 +56,7 @@ mod tests {
     fn test_merge_alternately() {
         let word1 = "abc".to_string();
         let word2 = "pqr".to_string();
-        let output = merge_alternately(word1, word2);
+        let output = Solution::merge_alternately(word1, word2);
         assert_eq!(output, "apbqcr".to_string());
     }
 
@@ -61,7 +64,7 @@ mod tests {
     fn test_merge_alternately2() {
         let word1 = "ab".to_string();
         let word2 = "pqrs".to_string();
-        let output = merge_alternately(word1, word2);
+        let output = Solution::merge_alternately(word1, word2);
         assert_eq!(output, "apbqrs".to_string());
     }
 
@@ -69,7 +72,7 @@ mod tests {
     fn test_merge_alternately3() {
         let word1 = "abcd".to_string();
         let word2 = "pq".to_string();
-        let output = merge_alternately(word1, word2);
+        let output = Solution::merge_alternately(word1, word2);
         assert_eq!(output, "apbqcd".to_string());
     }
 }

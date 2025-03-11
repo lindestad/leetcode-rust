@@ -9,4 +9,5 @@ pub mod q1790;
 pub mod q20;
 pub mod q22;
 pub mod q39;
+pub mod q605;
 

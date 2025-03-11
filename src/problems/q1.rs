@@ -3,15 +3,19 @@
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
 // You can return the answer in any order.
 
-pub fn solution(nums: Vec<i32>, target: i32) -> Vec<i32> {
-    for i in 0..nums.len() {
-        for j in i + 1..nums.len() {
-            if nums[i] + nums[j] == target {
-                return vec![i as i32, j as i32];
+pub struct Solution;
+
+impl Solution {
+    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+        for i in 0..nums.len() {
+            for j in i + 1..nums.len() {
+                if nums[i] + nums[j] == target {
+                    return vec![i as i32, j as i32];
+                }
             }
         }
+        vec![]
     }
-    vec![]
 }
 
 pub fn fast_solution(nums: Vec<i32>, target: i32) -> Vec<i32> {
@@ -36,7 +40,7 @@ mod tests {
     fn test_solution_case1() {
         let input = vec![2, 7, 11, 15];
         let target = 9;
-        let output = solution(input, target);
+        let output = Solution::two_sum(input, target);
         assert_eq!(output, vec![0, 1]);
     }
 
@@ -44,7 +48,7 @@ mod tests {
     fn test_solution_case2() {
         let input = vec![3, 2, 4];
         let target = 6;
-        let output = solution(input, target);
+        let output = Solution::two_sum(input, target);
         assert_eq!(output, vec![1, 2]);
     }
 
@@ -52,7 +56,7 @@ mod tests {
     fn test_solution_case3() {
         let input = vec![3, 3];
         let target = 6;
-        let output = solution(input, target);
+        let output = Solution::two_sum(input, target);
         assert_eq!(output, vec![0, 1]);
     }
 
