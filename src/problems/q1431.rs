@@ -1,5 +1,13 @@
 pub fn kids_with_candies(candies: Vec<i32>, extra_candies: i32) -> Vec<bool> {
-    todo!()
+    let size = candies.len();
+
+    let max_candies = *candies.iter().max().unwrap();
+    let mut bools: Vec<bool> = Vec::with_capacity(size);
+
+    for candy in candies {
+        bools.push((candy + extra_candies) >= max_candies);
+    }
+    bools
 }
 
 #[cfg(test)]
