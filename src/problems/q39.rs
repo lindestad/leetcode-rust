@@ -50,6 +50,7 @@ pub fn solution(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
 
 mod tests {
 
+    #[allow(unused_imports)]
     use super::*;
 
     #[test]

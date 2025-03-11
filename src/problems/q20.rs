@@ -29,27 +29,27 @@ mod tests {
     fn test_solution_case() {
         let input = "()".to_string();
         let output = solution(input);
-        assert_eq!(output, true);
+        assert!(output);
     }
 
     #[test]
     fn test_solution_case2() {
         let input = "()[]{}".to_string();
         let output = solution(input);
-        assert_eq!(output, true);
+        assert!(output);
     }
 
     #[test]
     fn test_solution_case3() {
         let input = "(]".to_string();
         let output = solution(input);
-        assert_eq!(output, false);
+        assert!(!output);
     }
 
     #[test]
     fn test_solution_case4() {
         let input = "([])".to_string();
         let output = solution(input);
-        assert_eq!(output, true);
+        assert!(output);
     }
 }
